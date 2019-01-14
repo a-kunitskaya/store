@@ -1,0 +1,12 @@
+<tiles-definitions>
+    <definition name="template-def"
+                template="WEB-INF/layout.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header"
+                       value="WEB-INF/parts/header.jsp"/>
+        <put-attribute name="body"
+                       value="WEB-INF/pages/*.jsp"/>
+        <put-attribute name="footer"
+                       value="WEB-INF/parts/footer.jsp"/>
+    </definition>
+</tiles-definitions>

@@ -50,8 +50,4 @@ public class ConfigProvider {
     public String getDBUrl() {
         return properties.getProperty("jdbc.url");
     }
-
-    public String getDBName() {
-        return properties.getProperty("jdbc.database.name");
-    }
 }

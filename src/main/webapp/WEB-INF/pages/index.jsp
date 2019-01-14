@@ -5,7 +5,7 @@
 </head>
 <body>
 <div>
-    <form action="servlet?command=login" method="POST">
+    <form action="products" method="POST">
         <br/>
         <input type="text" placeholder="Enter username" class="form" name="username"/>
         <br/>

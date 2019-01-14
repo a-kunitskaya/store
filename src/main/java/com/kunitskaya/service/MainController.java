@@ -14,8 +14,9 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "products", method = RequestMethod.POST)
+    @RequestMapping(value = "/products", method = RequestMethod.POST)
     public String logIn(Model model){
         return "products";
+
     }
 }

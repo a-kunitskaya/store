@@ -11,9 +11,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import javax.sql.DataSource;
 
@@ -23,8 +26,13 @@ import javax.sql.DataSource;
 public class AppConfiguration implements WebMvcConfigurer {
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        TilesViewResolver viewResolver = new TilesViewResolver();
+        registry.viewResolver(viewResolver);
     }
 
     @Bean
@@ -35,6 +43,13 @@ public class AppConfiguration implements WebMvcConfigurer {
         resolver.setViewClass(JstlView.class);
 
         return resolver;
+    }
+
+    @Bean
+    public TilesConfigurer tilesConfigurer() {
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions("WEB-INF/tiles.xml");
+        return tilesConfigurer;
     }
 
     @Bean
@@ -53,22 +68,22 @@ public class AppConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
+    public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(mysqlDataSource());
     }
 
     @Bean
-    public UserDatabaseOperations userDatabaseOperations(){
+    public UserDatabaseOperations userDatabaseOperations() {
         return new UserDatabaseOperations();
     }
 
     @Bean
-    public Logger logger(){
+    public Logger logger() {
         return LogManager.getLogger(this);
     }
 
     @Bean
-    public MainController mainController(){
+    public MainController mainController() {
         return new MainController();
     }
 }

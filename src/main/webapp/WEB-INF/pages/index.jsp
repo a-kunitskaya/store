@@ -1,10 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<html>
-<head>
-    <title>Trade System</title>
-</head>
-<body>
-<div>
+<div xmlns:jsp="http://java.sun.com/JSP/Page">
     <form action="products" method="POST">
         <br/>
         <input type="text" placeholder="Enter username" class="form" name="username"/>

@@ -1,9 +1,7 @@
 package com.kunitskaya.service.database;
 
 import com.kunitskaya.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 public class UserDatabaseOperations extends DatabaseOperations {
 

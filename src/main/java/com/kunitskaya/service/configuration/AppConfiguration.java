@@ -1,6 +1,7 @@
 package com.kunitskaya.service.configuration;
 
 import com.kunitskaya.service.MainController;
+import com.kunitskaya.service.database.DatabaseOperations;
 import com.kunitskaya.service.database.UserDatabaseOperations;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,22 +54,27 @@ public class AppConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
+    public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(mysqlDataSource());
     }
 
     @Bean
-    public UserDatabaseOperations userDatabaseOperations(){
+    public UserDatabaseOperations userDatabaseOperations() {
         return new UserDatabaseOperations();
     }
 
     @Bean
-    public Logger logger(){
+    public DatabaseOperations databaseOperations() {
+        return new DatabaseOperations();
+    }
+
+    @Bean
+    public Logger logger() {
         return LogManager.getLogger(this);
     }
 
     @Bean
-    public MainController mainController(){
+    public MainController mainController() {
         return new MainController();
     }
 }

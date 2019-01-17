@@ -4,6 +4,6 @@
     <title>Products</title>
 </head>
 <body>
-
+${authorized_user}
 </body>
 </html>

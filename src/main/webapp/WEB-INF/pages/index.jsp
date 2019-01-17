@@ -5,7 +5,7 @@
 </head>
 <body>
 <div>
-    <form action="products" method="POST">
+    <form action="/products" method="POST" name="user">
         <br/>
         <input type="text" placeholder="Enter username" class="form" name="username"/>
         <br/>

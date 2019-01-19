@@ -10,14 +10,21 @@
 <div>
     <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
         <form action="/products" method="POST" name="user">
-            <input type="text" placeholder=<fmt:message key="username"/> class="form" name="username"/>
+            <input type="text" placeholder=
+                <fmt:message key="username"/> class="form" name="username"/>
             <br/>
-            <input type="text" placeholder=<fmt:message key="password"/> class="form" name="password"/>
+            <input type="text" placeholder=
+                <fmt:message key="password"/> class="form" name="password"/>
             <br/>
-            <input type="submit" class="button" value="<fmt:message key="submit"/>"/>
+            <input type="submit" class="button" value="<fmt:message key="logInBtn"/>"/>
         </form>
+
+        <c:if test="${not empty error}">
+            <p>${error}</p>
+        </c:if>
+
         <form action="/registration" method="GET">
-            <input type="submit" class="button" value="<fmt:message key="registration"/>"/>
+            <input type="submit" class="button" value="<fmt:message key="registrationBtn"/>"/>
         </form>
     </fmt:bundle>
 </div>

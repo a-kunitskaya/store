@@ -1,10 +1,8 @@
 package com.kunitskaya.service.configuration;
 
+import com.kunitskaya.entity.User;
 import com.kunitskaya.service.MainController;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -19,13 +17,13 @@ public class AppConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
+        registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
     }
 
     @Bean
     public InternalResourceViewResolver setupViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/pages/");
+        resolver.setPrefix("/pages/");
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
 
@@ -35,5 +33,11 @@ public class AppConfiguration implements WebMvcConfigurer {
     @Bean
     public MainController mainController() {
         return new MainController();
+    }
+
+    @Bean
+    @Scope("prototype")
+    public User user(){
+        return new User();
     }
 }

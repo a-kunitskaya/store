@@ -10,9 +10,12 @@ public class EnLocaleBundle extends ListResourceBundle {
     private static final Object[][] contents = {
             {"username", "Username"},
             {"password", "Password"},
-            {"submit", "SUBMIT"},
-            {"registration", "REGISTRATION"},
-            {"vendor", "vendor"},
-            {"customer", "customer"}
+            {"logInBtn", "LOG IN"},
+            {"registrationBtn", "REGISTRATION"},
+            {"vendor", "VENDOR"},
+            {"customer", "CUSTOMER"},
+            {"welcome", "THANKS FOR JOINING TRADE-SYSTEM, WELCOME!"},
+            {"successRegistrationMsg", "Your registration was successful. Please log in now"},
+            {"role", "User role"}
     };
 }

@@ -7,19 +7,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDatabaseOperations extends DatabaseOperations {
 
-    public UserDatabaseOperations() {
-        createTable();
-    }
-
-    @Override
-    void createTable() {
-        String query = "create table if not exists users(username VARCHAR(30), password VARCHAR(30), role VARCHAR(20), primary key (username))";
-        jdbcTemplate.update(query);
-    }
+//    public UserDatabaseOperations() {
+//        createTable();
+//    }
+//
+//    @Override
+//    void createTable() {
+//        String query = "create table if not exists users(username VARCHAR(30), password VARCHAR(30), role VARCHAR(20), primary key (username))";
+//        jdbcTemplate.update(query);
+//    }
 
     public void addUser(User user) {
         String query = "INSERT INTO users VALUES(?, ?, ?)";
-        jdbcTemplate.update(query, user.getUsername(), user.getPassword(), user.getRole());
+        jdbcTemplate.update(query, user.getUsername(), user.getPassword(), user.getRole().name());
     }
 
     public User getUser(String username, String password) {

@@ -25,9 +25,20 @@ public class MainController {
         User user = userDatabaseOperations.getUser(username, password);
         if (user != null) {
             model.addAttribute("authorized_user", user.getUsername());
-        }
+        }else{
 
+        }
         return "products";
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String getRegistration(Model model, @ModelAttribute("username") String username,  @ModelAttribute("password") String password) {
+        return "registration";
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String register(){
 
     }
+
 }

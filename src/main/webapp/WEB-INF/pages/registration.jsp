@@ -4,7 +4,7 @@
 <fmt:setLocale value="en_US"/>
 <html>
 <head>
-    <title>Trade System</title>
+    <title>Registration</title>
 </head>
 <body>
 <div>
@@ -14,13 +14,15 @@
             <br/>
             <input type="text" placeholder=<fmt:message key="password"/> class="form" name="password"/>
             <br/>
+            <select>
+                <option value="merchant"><fmt:message key="vendor"/></option>
+                <option value="customer"><fmt:message key="customer"/></option>
+            </select>
             <input type="submit" class="button" value="<fmt:message key="submit"/>"/>
-        </form>
-        <form action="/registration" method="GET">
-            <input type="submit" class="button" value="<fmt:message key="registration"/>"/>
         </form>
     </fmt:bundle>
 </div>
 </body>
 </html>
+
 

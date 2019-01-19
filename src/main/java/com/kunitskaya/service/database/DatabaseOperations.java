@@ -7,11 +7,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DatabaseOperations {
+public abstract class DatabaseOperations {
     @Autowired
     protected Logger logger;
     @Autowired
     protected ConfigProvider configProvider;
     @Autowired
     protected JdbcTemplate jdbcTemplate;
+
+    abstract void createTable();
 }

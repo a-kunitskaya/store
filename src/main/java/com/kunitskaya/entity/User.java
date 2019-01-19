@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 public class User {
     private String username;
     private String password;
+    private UserRoles role;
 
     public String getUsername() {
         return username;
@@ -21,5 +22,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserRoles getRole() {
+        return role;
+    }
+
+    public void setRole(UserRoles role) {
+        this.role = role;
     }
 }

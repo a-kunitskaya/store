@@ -1,5 +1,6 @@
 package com.kunitskaya.service.configuration;
 
+import com.kunitskaya.service.database.ProductDatabaseOperations;
 import com.kunitskaya.service.database.UserDatabaseOperations;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,6 +38,11 @@ public class BeanConfiguration {
     @Bean
     public UserDatabaseOperations userDatabaseOperations() {
         return new UserDatabaseOperations();
+    }
+
+    @Bean
+    public ProductDatabaseOperations productDatabaseOperations() {
+        return new ProductDatabaseOperations();
     }
 
     @Bean

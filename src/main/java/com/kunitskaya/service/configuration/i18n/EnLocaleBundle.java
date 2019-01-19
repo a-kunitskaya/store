@@ -16,6 +16,8 @@ public class EnLocaleBundle extends ListResourceBundle {
             {"customer", "CUSTOMER"},
             {"welcome", "THANKS FOR JOINING TRADE-SYSTEM, WELCOME!"},
             {"successRegistrationMsg", "Your registration was successful. Please log in now"},
-            {"role", "User role"}
+            {"role", "User role"},
+            {"addProductMsg", "Enter product id to add to your cart"},
+            {"addBtn", "ADD"}
     };
 }

@@ -1,7 +1,9 @@
 package com.kunitskaya.service;
 
+import com.kunitskaya.entity.Product;
 import com.kunitskaya.entity.User;
 import com.kunitskaya.entity.UserRoles;
+import com.kunitskaya.service.database.ProductDatabaseOperations;
 import com.kunitskaya.service.database.UserDatabaseOperations;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class MainController {
     @Autowired
     private UserDatabaseOperations userDatabaseOperations;
+    @Autowired
+    private ProductDatabaseOperations productDatabaseOperations;
     @Autowired
     private User user;
     @Autowired
@@ -29,6 +35,9 @@ public class MainController {
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public String logIn(Model model, @ModelAttribute("username") String username, @ModelAttribute("password") String password) {
+        List<Product> products = productDatabaseOperations.getProducts();
+        model.addAttribute("products", products);
+
         try {
             user = userDatabaseOperations.getUser(username, password);
             return "products";
@@ -52,5 +61,12 @@ public class MainController {
         user.setRole(UserRoles.valueOf(role));
         userDatabaseOperations.addUser(user);
         return "successRegistration";
+    }
+
+    @RequestMapping(value = "addProduct", method = RequestMethod.POST)
+    public String addProductToCart(@ModelAttribute("productId") String productId) {
+        logger.info("Adding product to cart, id: " + productId);
+
+        productDatabaseOperations.addProductToCart(productId);
     }
 }

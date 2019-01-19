@@ -15,5 +15,5 @@ public abstract class DatabaseOperations {
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
-   // abstract void createTable();
+   abstract void createTable();
 }

@@ -7,6 +7,11 @@
     <title>Products</title>
 </head>
 <body>
+
+<c:if test="${not empty cancelledOrder}">
+    <h1><fmt:message key="cancelledOrderMsg"/></h1>
+</c:if>
+
 <table>
     <tr>
         <th>ID</th>
@@ -23,10 +28,13 @@
 
 <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
     <form action="/addProduct" method="POST">
-        <br/>
         <input type="text" placeholder="<fmt:message key="addProductMsg"/>" name="productId"/>
         <br/>
         <input type="submit" class="button" value="<fmt:message key="addBtn"/>"/>
+    </form>
+    <br/>
+    <form action="/viewOrder" method="GET">
+        <input type="submit" class="button" value="<fmt:message key="viewOrderBtn"/>"/>
     </form>
 </fmt:bundle>
 </body>

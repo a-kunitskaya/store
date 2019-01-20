@@ -35,8 +35,7 @@ public class BeanConfiguration {
 
     @Bean
     public JdbcTemplate jdbcTemplate() {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(mysqlDataSource());
-        return jdbcTemplate;
+        return new JdbcTemplate(mysqlDataSource());
     }
 
     @Bean
@@ -61,13 +60,18 @@ public class BeanConfiguration {
 
     @Bean
     @Scope("prototype")
-    public Product product(){
+    public Product product() {
         return new Product();
     }
 
     @Bean
     @Scope("prototype")
-    public User user(){
+    public User user() {
         return new User();
+    }
+
+    @Bean
+    public TablesInitializer tablesInitializer() {
+        return new TablesInitializer();
     }
 }

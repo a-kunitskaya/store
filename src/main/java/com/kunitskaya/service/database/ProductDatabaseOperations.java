@@ -7,16 +7,14 @@ import java.util.List;
 
 public class ProductDatabaseOperations extends DatabaseOperations {
 
-//    @Override
-//    void createTable() {
-//        String query = "create table if not exists products(id INTEGER, name VARCHAR(30), price DOUBLE, primary key (id))";
-//        jdbcTemplate.execute(query);
-//    }
+    public void createTable() {
+        String query = "create table if not exists products(id INTEGER, name VARCHAR(30), price DOUBLE, primary key (id))";
+        jdbcTemplate.execute(query);
+    }
 
     public List<Product> getProducts() {
         String query = "SELECT * FROM products";
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Product.class));
-
     }
 
     public void addProduct(Product product) {
@@ -24,4 +22,8 @@ public class ProductDatabaseOperations extends DatabaseOperations {
         jdbcTemplate.update(query, product.getId(), product.getName(), product.getPrice());
     }
 
+    public Product getProduct(String productId) {
+        String query = "select * from products where id = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{productId}, new BeanPropertyRowMapper<>(Product.class));
+    }
 }

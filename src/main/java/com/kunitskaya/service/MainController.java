@@ -1,8 +1,6 @@
 package com.kunitskaya.service;
 
-import com.kunitskaya.entity.Product;
-import com.kunitskaya.entity.User;
-import com.kunitskaya.entity.UserRoles;
+import com.kunitskaya.entity.*;
 import com.kunitskaya.service.database.OrderDatabaseOperations;
 import com.kunitskaya.service.database.ProductDatabaseOperations;
 import com.kunitskaya.service.database.UserDatabaseOperations;
@@ -30,8 +28,6 @@ public class MainController {
     private User user;
     @Autowired
     private Logger logger;
-    @Autowired
-    private Product product;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getIndex(Model model) {
@@ -68,10 +64,26 @@ public class MainController {
     }
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-    public String addProductToOrder(@ModelAttribute("productId") String productId) {
+    public String addProductToOrder(Model model, @ModelAttribute("productId") String productId) {
         logger.info("Adding product to order, id: " + productId);
 
-        orderDatabaseOperations.addProduct(productId, user);
+        Order order = orderDatabaseOperations.createOrder(user);
+        orderDatabaseOperations.addProduct(productId, order);
+        model.addAttribute("order", order);
+        return "products";
+    }
+
+    @RequestMapping(value = "/viewOrder", method = RequestMethod.GET)
+    public String viewOrder(@ModelAttribute("order") Order order) {
+        return "order";
+    }
+
+    @RequestMapping(value = "/cancelOrder", method = RequestMethod.GET)
+    public String cancelOrder(Model model, @ModelAttribute("order") Order order) {
+        logger.info("Cancelling order: " + order.getId());
+
+        order.setStatus(OrderStatus.CANCELLED);
+        model.addAttribute("cancelledOrder", order);
         return "products";
     }
 }

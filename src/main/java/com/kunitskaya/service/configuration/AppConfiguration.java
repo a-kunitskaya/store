@@ -36,4 +36,5 @@ public class AppConfiguration implements WebMvcConfigurer {
     public MainController mainController() {
         return new MainController();
     }
+
 }

@@ -8,16 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public abstract class DatabaseOperations {
-//    public DatabaseOperations() {
-//        createTable();
-//    }
-
     @Autowired
     protected Logger logger;
     @Autowired
     protected ConfigProvider configProvider;
     @Autowired
     protected JdbcTemplate jdbcTemplate;
-//
-//    abstract void createTable();
 }

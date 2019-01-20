@@ -6,12 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDatabaseOperations extends DatabaseOperations {
-//
-//    @Override
-//    void createTable() {
-//        String query = "create table if not exists users(username VARCHAR(30), password VARCHAR(30), role VARCHAR(20), primary key (username))";
-//        jdbcTemplate.update(query);
-//    }
+
+    public void createTable() {
+        String query = "create table if not exists users(username VARCHAR(30), password VARCHAR(30), role VARCHAR(20), primary key (username))";
+        jdbcTemplate.update(query);
+    }
 
     public void addUser(User user) {
         String query = "INSERT INTO users VALUES(?, ?, ?)";

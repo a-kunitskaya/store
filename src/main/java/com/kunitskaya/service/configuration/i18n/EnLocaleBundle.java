@@ -14,10 +14,16 @@ public class EnLocaleBundle extends ListResourceBundle {
             {"registrationBtn", "REGISTRATION"},
             {"vendor", "VENDOR"},
             {"customer", "CUSTOMER"},
-            {"welcome", "THANKS FOR JOINING TRADE-SYSTEM, WELCOME!"},
+            {"welcome", "THANKS FOR JOINING TRADE SYSTEM, WELCOME!"},
             {"successRegistrationMsg", "Your registration was successful. Please log in now"},
             {"role", "User role"},
             {"addProductMsg", "Enter product id to add to your cart"},
-            {"addBtn", "ADD"}
+            {"addBtn", "ADD"},
+            {"viewOrderBtn", "VIEW ORDER"},
+            {"viewOrderMsg", "Here is you order. Current order status = CREATED"},
+            {"checkoutBtn", "CHECKOUT"},
+            {"checkoutMsg", "Thanks for your order. Current order status = COMPLETED, we will deliver it shortly. Please click 'CANCEL' to cancel your order"},
+            {"cancelBtn", "CANCEL"},
+            {"cancelledOrderMsg", "Your order has been cancelled. Please continue shopping to create a new one"}
     };
 }

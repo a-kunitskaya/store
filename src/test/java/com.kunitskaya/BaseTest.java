@@ -1,6 +1,7 @@
 package com.kunitskaya;
 
 import com.kunitskaya.service.configuration.BeanConfiguration;
+import com.kunitskaya.service.database.OrderDatabaseOperations;
 import com.kunitskaya.service.database.ProductDatabaseOperations;
 import com.kunitskaya.service.database.UserDatabaseOperations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class BaseTest {
     protected UserDatabaseOperations userDatabaseOperations;
     @Autowired
     protected ProductDatabaseOperations productDatabaseOperations;
+    @Autowired
+    protected OrderDatabaseOperations orderDatabaseOperations;
 
     @BeforeClass
     public void setUp() throws Exception {

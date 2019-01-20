@@ -41,7 +41,7 @@ public class DatabaseTest extends BaseTest {
         List<Product> products = new ArrayList<>();
         for (int i = 0; i < RandomUtils.nextInt(3, 15); i++) {
             Product product = new Product();
-            product.setId(i);
+            product.setId(String.valueOf(i));
             product.setName(RandomStringUtils.randomAlphabetic(1, 10));
             product.setPrice(RandomUtils.nextDouble(10, 1000));
             productDatabaseOperations.addProduct(product);
@@ -51,10 +51,11 @@ public class DatabaseTest extends BaseTest {
         return products;
     }
 
-    @Test(dependsOnMethods = "getProducts")
+    @Test
     public void addProductToOrder() {
-        Order order = new Order();
-        order.setId(RandomStringUtils.randomAlphanumeric(1, 4));
+        User user = new User();
+        user.setUsername(RandomStringUtils.randomAlphabetic(1, 5));
+        Order order = orderDatabaseOperations.createOrder(user);
         orderDatabaseOperations.addProduct(RandomStringUtils.randomAlphanumeric(1, 4), order);
     }
 }

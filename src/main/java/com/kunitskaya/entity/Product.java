@@ -4,15 +4,15 @@ import java.util.Objects;
 
 //Task 1 Order
 public class Product {
-    private int id;
+    private String id;
     private double price;
     private String name;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,8 +37,8 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id &&
-                Double.compare(product.price, price) == 0 &&
+        return Double.compare(product.price, price) == 0 &&
+                Objects.equals(id, product.id) &&
                 Objects.equals(name, product.name);
     }
 

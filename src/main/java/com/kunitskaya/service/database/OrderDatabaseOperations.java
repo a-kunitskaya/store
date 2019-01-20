@@ -4,6 +4,7 @@ import com.kunitskaya.entity.Order;
 import com.kunitskaya.entity.Product;
 import com.kunitskaya.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 public class OrderDatabaseOperations extends DatabaseOperations {
     @Autowired
@@ -12,13 +13,16 @@ public class OrderDatabaseOperations extends DatabaseOperations {
     public void addProduct(String productId, Order order) {
         logger.info("Adding product to order, product id: " + productId);
 
-        Product product = productDatabaseOperations.getProduct(productId);
-        if (getProduct(productId, order) == null) {
-            String query = "insert into " + order.getId() + " values(?, ?)";
-            jdbcTemplate.update(query, productId);
-            order.getProducts().add(product);
-        } else {
+        Product product;
+        try {
+            product = productDatabaseOperations.getProduct(productId);
             updateProductCount(order, product);
+        } catch (EmptyResultDataAccessException e) {
+            product = new Product();
+            product.setId(productId);
+            String query = "insert into " + order.getId() + " values(?, ?)";
+            jdbcTemplate.update(query, productId, 1);
+            order.getProducts().add(product);
         }
     }
 
@@ -39,18 +43,18 @@ public class OrderDatabaseOperations extends DatabaseOperations {
         String orderId = "order" + user.getUsername();
         order.setId(orderId);
 
-        String query = "create table if not exists " + orderId + " (productId INTEGER NOT NULL, count INTEGER NOT NULL)";
+        String query = "create table if not exists " + orderId + " (productId VARCHAR(20) NOT NULL, count INTEGER NOT NULL)";
         jdbcTemplate.execute(query);
         return order;
     }
 
-    private Order getProduct(String productId, Order order) {
+    private Order getOrderProduct(String productId, Order order) {
         String query = "select * from " + order.getId() + " where productId = ?";
-        return jdbcTemplate.queryForObject(query, new Integer[]{Integer.parseInt(productId)}, Order.class);
+        return jdbcTemplate.queryForObject(query, new Object[]{productId}, Order.class);
     }
 
     private Integer getProductCount(Order order, Product product) {
-        String query = "select 'count' from " + order.getId() + " where productId = ?";
+        String query = "select count from " + order.getId() + " where productId = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{product.getId()}, Integer.class);
     }
 }

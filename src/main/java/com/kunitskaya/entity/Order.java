@@ -5,12 +5,15 @@ import java.util.List;
 
 //Task 1 Purchase
 public class Order {
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
     private double totalPrice;
     private OrderStatus status;
     private String id;
 
     public List<Product> getProducts() {
+        if(products == null){
+            products = new ArrayList<>();
+        }
         return products;
     }
 

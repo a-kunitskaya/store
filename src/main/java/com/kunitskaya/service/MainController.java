@@ -68,8 +68,13 @@ public class MainController {
         logger.info("Adding product to order, id: " + productId);
 
         Order order = orderDatabaseOperations.createOrder(user);
+
+        Product product = productDatabaseOperations.getProduct(productId);
+        order.getProducts().add(product);
+
         orderDatabaseOperations.addProduct(productId, order);
         model.addAttribute("order", order);
+
         return "products";
     }
 
@@ -85,5 +90,10 @@ public class MainController {
         order.setStatus(OrderStatus.CANCELLED);
         model.addAttribute("cancelledOrder", order);
         return "products";
+    }
+
+    @RequestMapping(value = "checkout", method = RequestMethod.GET)
+    public String checkout() {
+        return "checkout";
     }
 }

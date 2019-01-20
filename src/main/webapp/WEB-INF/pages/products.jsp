@@ -24,9 +24,9 @@
 <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
     <form action="/addProduct" method="POST">
         <br/>
-        <input type="text" value=<fmt:message key="addProductMsg"/> name="productId"/>
+        <input type="text" placeholder="<fmt:message key="addProductMsg"/>" name="productId"/>
         <br/>
-        <input type="submit" class="button" value=<fmt:message key="addBtn"/>/>
+        <input type="submit" class="button" value="<fmt:message key="addBtn"/>"/>
     </form>
 </fmt:bundle>
 </body>

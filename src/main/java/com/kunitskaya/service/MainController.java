@@ -60,7 +60,6 @@ public class MainController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String register(@ModelAttribute("username") String username, @ModelAttribute("password") String password, @ModelAttribute("role") String role) {
-        user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setRole(UserRoles.valueOf(role));
@@ -70,7 +69,7 @@ public class MainController {
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
     public String addProductToOrder(@ModelAttribute("productId") String productId) {
-        logger.info("Adding product to cart, id: " + productId);
+        logger.info("Adding product to order, id: " + productId);
 
         orderDatabaseOperations.addProduct(productId, user);
         return "products";

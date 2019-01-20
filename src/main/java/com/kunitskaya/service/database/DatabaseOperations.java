@@ -1,6 +1,5 @@
 package com.kunitskaya.service.database;
 
-import com.kunitskaya.entity.User;
 import com.kunitskaya.service.configuration.ConfigProvider;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ public abstract class DatabaseOperations {
     protected ConfigProvider configProvider;
     @Autowired
     protected JdbcTemplate jdbcTemplate;
-    @Autowired
-    protected User user;
 //
 //    abstract void createTable();
 }

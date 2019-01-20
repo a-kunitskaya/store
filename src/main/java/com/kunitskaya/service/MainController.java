@@ -3,6 +3,7 @@ package com.kunitskaya.service;
 import com.kunitskaya.entity.Product;
 import com.kunitskaya.entity.User;
 import com.kunitskaya.entity.UserRoles;
+import com.kunitskaya.service.database.OrderDatabaseOperations;
 import com.kunitskaya.service.database.ProductDatabaseOperations;
 import com.kunitskaya.service.database.UserDatabaseOperations;
 import org.apache.logging.log4j.Logger;
@@ -24,9 +25,13 @@ public class MainController {
     @Autowired
     private ProductDatabaseOperations productDatabaseOperations;
     @Autowired
+    private OrderDatabaseOperations orderDatabaseOperations;
+    @Autowired
     private User user;
     @Autowired
     private Logger logger;
+    @Autowired
+    private Product product;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getIndex(Model model) {
@@ -63,10 +68,11 @@ public class MainController {
         return "successRegistration";
     }
 
-    @RequestMapping(value = "addProduct", method = RequestMethod.POST)
-    public String addProductToCart(@ModelAttribute("productId") String productId) {
+    @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
+    public String addProductToOrder(@ModelAttribute("productId") String productId) {
         logger.info("Adding product to cart, id: " + productId);
 
-        productDatabaseOperations.addProductToCart(productId);
+        orderDatabaseOperations.addProduct(productId, user);
+        return "products";
     }
 }

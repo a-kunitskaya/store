@@ -1,11 +1,15 @@
 package com.kunitskaya.service.configuration;
 
+import com.kunitskaya.entity.Product;
+import com.kunitskaya.entity.User;
+import com.kunitskaya.service.database.OrderDatabaseOperations;
 import com.kunitskaya.service.database.ProductDatabaseOperations;
 import com.kunitskaya.service.database.UserDatabaseOperations;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -46,7 +50,24 @@ public class BeanConfiguration {
     }
 
     @Bean
+    public OrderDatabaseOperations orderDatabaseOperations() {
+        return new OrderDatabaseOperations();
+    }
+
+    @Bean
     public Logger logger() {
         return LogManager.getLogger(this);
+    }
+
+    @Bean
+    @Scope("prototype")
+    public Product product(){
+        return new Product();
+    }
+
+    @Bean
+    @Scope("prototype")
+    public User user(){
+        return new User();
     }
 }

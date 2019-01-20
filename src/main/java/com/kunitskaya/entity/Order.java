@@ -5,7 +5,7 @@ import java.util.List;
 //Task 1 Purchase
 public class Order {
     private List<Product> products;
-    private double price;
+    private double totalPrice;
     private OrderStatus status;
 
     public List<Product> getProducts() {
@@ -16,12 +16,12 @@ public class Order {
         this.products = products;
     }
 
-    public double getPrice() {
-        return price;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public OrderStatus getStatus() {

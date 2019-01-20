@@ -9,9 +9,9 @@
 <body>
 <table>
     <tr>
-        <th>id</th>
-        <th>name</th>
-        <th>price</th>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>PRICE</th>
     </tr>
     <c:forEach var="product" items="${products}">
     <tr>
@@ -21,12 +21,13 @@
         </c:forEach>
 </table>
 
-<form action="/addProduct" method="POST">
-    <br/>
-    <input type="text" placeholder=<fmt:message key="addProductMsg"/> name="productId"/>
-    <br/>
-    <input type="submit" class="button" value=<fmt:message key="addBtn"/>/>
-</form>
-
+<fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
+    <form action="/addProduct" method="POST">
+        <br/>
+        <input type="text" value=<fmt:message key="addProductMsg"/> name="productId"/>
+        <br/>
+        <input type="submit" class="button" value=<fmt:message key="addBtn"/>/>
+    </form>
+</fmt:bundle>
 </body>
 </html>

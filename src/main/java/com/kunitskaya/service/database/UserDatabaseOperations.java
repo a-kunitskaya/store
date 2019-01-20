@@ -6,10 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDatabaseOperations extends DatabaseOperations {
-
-//    public UserDatabaseOperations() {
-//        createTable();
-//    }
 //
 //    @Override
 //    void createTable() {

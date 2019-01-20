@@ -11,7 +11,7 @@
     <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
         <h1><fmt:message key="welcome"/></h1>
         <p><fmt:message key="successRegistrationMsg"/></p>
-        <form action="/index" method="GET">
+        <form action="/" method="GET">
             <input type="submit" class="button" value="<fmt:message key="logInBtn"/>"/>
         </form>
     </fmt:bundle>

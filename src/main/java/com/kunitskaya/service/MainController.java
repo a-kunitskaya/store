@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -35,7 +36,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
-    public String logIn(Model model, @ModelAttribute("username") String username, @ModelAttribute("password") String password) {
+    public String viewProducts(Model model, @ModelAttribute("username") String username, @ModelAttribute("password") String password) {
         List<Product> products = productDatabaseOperations.getProducts();
         model.addAttribute("products", products);
 
@@ -75,11 +76,17 @@ public class MainController {
         orderDatabaseOperations.addProduct(productId, order);
         model.addAttribute("order", order);
 
-        return "products";
+        return viewProducts(model, user.getUsername(), user.getPassword());
     }
 
     @RequestMapping(value = "/viewOrder", method = RequestMethod.GET)
-    public String viewOrder(@ModelAttribute("order") Order order) {
+    public String viewOrder(Model model, @ModelAttribute("order") Order order) {
+        logger.info("Getting products in order");
+
+        //order = null!!!
+
+        Map<Product, Integer> orderProducts = orderDatabaseOperations.getProductCount(order);
+        model.addAttribute("order", orderProducts);
         return "order";
     }
 
@@ -89,7 +96,7 @@ public class MainController {
 
         order.setStatus(OrderStatus.CANCELLED);
         model.addAttribute("cancelledOrder", order);
-        return "products";
+        return viewProducts(model, user.getUsername(), user.getPassword());
     }
 
     @RequestMapping(value = "checkout", method = RequestMethod.GET)

@@ -7,26 +7,24 @@
     <title>Products</title>
 </head>
 <body>
-
-<c:if test="${not empty cancelledOrder}">
-    <h1><fmt:message key="cancelledOrderMsg"/></h1>
-</c:if>
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>NAME</th>
-        <th>PRICE</th>
-    </tr>
-    <c:forEach var="product" items="${products}">
-    <tr>
-        <td>${product.id}</td>
-        <td>${product.name}</td>
-        <td>${product.price}</td>
-        </c:forEach>
-</table>
-
 <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
+    <c:if test="${not empty cancelledOrder}">
+        <h1><fmt:message key="cancelledOrderMsg"/></h1>
+    </c:if>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>PRICE</th>
+        </tr>
+        <c:forEach var="product" items="${products}">
+        <tr>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            </c:forEach>
+    </table>
     <form action="/addProduct" method="POST">
         <input type="text" placeholder="<fmt:message key="addProductMsg"/>" name="productId"/>
         <br/>

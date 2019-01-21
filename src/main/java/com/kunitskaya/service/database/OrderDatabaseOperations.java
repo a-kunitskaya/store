@@ -1,10 +1,15 @@
 package com.kunitskaya.service.database;
 
 import com.kunitskaya.entity.Order;
+import com.kunitskaya.entity.OrderStatus;
 import com.kunitskaya.entity.Product;
 import com.kunitskaya.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class OrderDatabaseOperations extends DatabaseOperations {
     @Autowired
@@ -42,6 +47,7 @@ public class OrderDatabaseOperations extends DatabaseOperations {
         Order order = new Order();
         String orderId = "order" + user.getUsername();
         order.setId(orderId);
+        order.setStatus(OrderStatus.CREATED);
 
         String query = "create table if not exists " + orderId + " (productId VARCHAR(20) NOT NULL, count INTEGER NOT NULL)";
         jdbcTemplate.execute(query);
@@ -56,5 +62,18 @@ public class OrderDatabaseOperations extends DatabaseOperations {
     private Integer getProductCount(Order order, Product product) {
         String query = "select count from " + order.getId() + " where productId = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{product.getId()}, Integer.class);
+    }
+
+    public Map<Product, Integer> getProductCount(Order order) {
+        List<Product> products = order.getProducts();
+        Map<Product, Integer> productCounts = new HashMap<>();
+
+        for (Product product : products) {
+            String query = "select count from " + order.getId() + "where productId = " + product.getId();
+            Integer count = jdbcTemplate.queryForObject(query, Integer.class);
+            productCounts.put(product, count);
+        }
+
+        return productCounts;
     }
 }

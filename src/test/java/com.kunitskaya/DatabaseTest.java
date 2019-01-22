@@ -55,7 +55,7 @@ public class DatabaseTest extends BaseTest {
     public void addProductToOrder() {
         User user = new User();
         user.setUsername(RandomStringUtils.randomAlphabetic(1, 5));
-        Order order = orderDatabaseOperations.createOrder(user);
+        Order order = orderDatabaseOperations.createOrder(user, null);
         orderDatabaseOperations.addProduct(RandomStringUtils.randomAlphanumeric(1, 4), order);
     }
 }

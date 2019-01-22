@@ -29,6 +29,7 @@ public class MainController {
     private User user;
     @Autowired
     private Logger logger;
+    private Order order;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getIndex(Model model) {
@@ -68,33 +69,46 @@ public class MainController {
     public String addProductToOrder(Model model, @ModelAttribute("productId") String productId) {
         logger.info("Adding product to order, id: " + productId);
 
-        Order order = orderDatabaseOperations.createOrder(user);
-
+        order = orderDatabaseOperations.createOrder(user, order);
         Product product = productDatabaseOperations.getProduct(productId);
+        orderDatabaseOperations.addProduct(productId, order);
         order.getProducts().add(product);
 
-        orderDatabaseOperations.addProduct(productId, order);
-        model.addAttribute("order", order);
+        return viewProducts(model, user.getUsername(), user.getPassword());
+    }
+
+    @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
+    public String removeProductFromOrder(Model model, @ModelAttribute("productId") String productId) {
+        logger.info("Removing product from order, id: " + productId);
+        boolean isProductInOrder = orderDatabaseOperations.isProductInOrder(productId, order);
+        if (isProductInOrder) {
+            orderDatabaseOperations.deleteProductFromOrder(productId, order);
+            Product product = productDatabaseOperations.getProduct(productId);
+            order.getProducts().remove(product);
+            logger.info("Product is removed from order");
+        } else {
+            String error = "Product is not in order. To delete a product please add it first";
+            model.addAttribute("error", error);
+            logger.info("Product is not removed from order");
+        }
 
         return viewProducts(model, user.getUsername(), user.getPassword());
     }
 
     @RequestMapping(value = "/viewOrder", method = RequestMethod.GET)
-    public String viewOrder(Model model, @ModelAttribute("order") Order order) {
+    public String viewOrder(Model model) {
         logger.info("Getting products in order");
-
-        //order = null!!!
-
         Map<Product, Integer> orderProducts = orderDatabaseOperations.getProductCount(order);
         model.addAttribute("order", orderProducts);
         return "order";
     }
 
     @RequestMapping(value = "/cancelOrder", method = RequestMethod.GET)
-    public String cancelOrder(Model model, @ModelAttribute("order") Order order) {
+    public String cancelOrder(Model model) {
         logger.info("Cancelling order: " + order.getId());
-
         order.setStatus(OrderStatus.CANCELLED);
+        orderDatabaseOperations.deleteOrder(order);
+
         model.addAttribute("cancelledOrder", order);
         return viewProducts(model, user.getUsername(), user.getPassword());
     }

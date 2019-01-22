@@ -11,29 +11,39 @@
     <c:if test="${not empty cancelledOrder}">
         <h1><fmt:message key="cancelledOrderMsg"/></h1>
     </c:if>
+    <c:if test="${not empty error}">
+        <p>${error}</p>
+    </c:if>
 
     <table>
         <tr>
             <th>ID</th>
             <th>NAME</th>
             <th>PRICE</th>
+            <th>ACTION</th>
         </tr>
         <c:forEach var="product" items="${products}">
         <tr>
             <td>${product.id}</td>
             <td>${product.name}</td>
             <td>${product.price}</td>
+            <td>
+                <form action="/addProduct" method="POST">
+                    <input type="hidden" name="productId" value=${product.id}/>
+                    <input type="submit" class="button" value="<fmt:message key="addBtn"/>"/>
+                </form>
+                <br/>
+                <form action="/deleteProduct" method="POST">
+                    <input type="hidden" name="productId" value=${product.id}/>
+                    <input type="submit" class="button" value="<fmt:message key="removeBtn"/>"/>
+                </form>
+            </td>
             </c:forEach>
     </table>
-    <form action="/addProduct" method="POST">
-        <input type="text" placeholder="<fmt:message key="addProductMsg"/>" name="productId"/>
-        <br/>
-        <input type="submit" class="button" value="<fmt:message key="addBtn"/>"/>
-    </form>
-    <br/>
     <form action="/viewOrder" method="GET">
         <input type="submit" class="button" value="<fmt:message key="viewOrderBtn"/>"/>
     </form>
+
 </fmt:bundle>
 </body>
 </html>

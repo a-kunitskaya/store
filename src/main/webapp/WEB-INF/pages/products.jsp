@@ -29,12 +29,12 @@
             <td>${product.price}</td>
             <td>
                 <form action="/addProduct" method="POST">
-                    <input type="hidden" name="productId" value=${product.id}/>
+                    <input type="hidden" name="productId" value="${product.id}"/>
                     <input type="submit" class="button" value="<fmt:message key="addBtn"/>"/>
                 </form>
                 <br/>
                 <form action="/deleteProduct" method="POST">
-                    <input type="hidden" name="productId" value=${product.id}/>
+                    <input type="hidden" name="productId" value="${product.id}"/>
                     <input type="submit" class="button" value="<fmt:message key="removeBtn"/>"/>
                 </form>
             </td>

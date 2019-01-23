@@ -6,11 +6,13 @@ import com.kunitskaya.entity.Product;
 import com.kunitskaya.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class OrderDatabaseOperations extends DatabaseOperations {
     @Autowired
     private ProductDatabaseOperations productDatabaseOperations;
@@ -21,7 +23,7 @@ public class OrderDatabaseOperations extends DatabaseOperations {
         Product product;
         try {
             product = productDatabaseOperations.getProduct(productId);
-            updateProductCount(order, product);
+            increaseProductCount(order, product);
         } catch (EmptyResultDataAccessException e) {
             product = new Product();
             product.setId(productId);
@@ -31,13 +33,23 @@ public class OrderDatabaseOperations extends DatabaseOperations {
         }
     }
 
-    private void updateProductCount(Order order, Product product) {
+    private void increaseProductCount(Order order, Product product) {
         logger.info("Updating product count, product id: " + product.getId());
 
         Integer count = getProductCount(order, product);
         count++;
         String query = "update " + order.getId() + " set count = ? where productId = ?";
         Object[] args = {count, product.getId()};
+        jdbcTemplate.update(query, args);
+    }
+
+    private void decreaseProductCount(Order order, String productId) {
+        logger.info("Decreasing product count, product id: " + productId);
+
+        Integer count = getProductCount(order, productId);
+        count--;
+        String query = "update " + order.getId() + " set count = ? where productId = ?";
+        Object[] args = {count, productId};
         jdbcTemplate.update(query, args);
     }
 
@@ -58,11 +70,11 @@ public class OrderDatabaseOperations extends DatabaseOperations {
     }
 
     public boolean isProductInOrder(String productId, Order order) {
-        String query = "select * from " + order.getId() + " where productId = ?";
-        Order orderWithProduct = jdbcTemplate.queryForObject(query, new Object[]{productId}, Order.class);
-        if (orderWithProduct != null) {
+
+        try {
+            getProductCount(order, productId);
             return true;
-        } else {
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
     }
@@ -70,6 +82,11 @@ public class OrderDatabaseOperations extends DatabaseOperations {
     private Integer getProductCount(Order order, Product product) {
         String query = "select count from " + order.getId() + " where productId = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{product.getId()}, Integer.class);
+    }
+
+    private Integer getProductCount(Order order, String productId) {
+        String query = "select count from " + order.getId() + " where productId = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{productId}, Integer.class);
     }
 
     public Map<Product, Integer> getProductCount(Order order) {
@@ -94,9 +111,12 @@ public class OrderDatabaseOperations extends DatabaseOperations {
     public void deleteProductFromOrder(String productId, Order order) {
         String message = "Deleting product: %s from order: %s";
         logger.info(String.format(message, productId, order.getId()));
-
-        String query = "delete from " + order.getId() + " where productId = ?";
-        jdbcTemplate.update(query, productId);
+        if (getProductCount(order, productId) > 1) {
+            logger.info("Product count > 1. Decreasing product count");
+            decreaseProductCount(order, productId);
+        } else {
+            String query = "delete from " + order.getId() + " where productId = ?";
+            jdbcTemplate.update(query, productId);
+        }
     }
-
 }

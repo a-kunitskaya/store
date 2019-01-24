@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${locale}"/>
 <html>
 <head>
     <title>Trade System</title>
-    <link rel="stylesheet" href="../resources/css/main.css"/>
+    <jsp:include page="../resources/style.jsp"/>
 </head>
 <body>
 <div>
-
-    <jsp:include page="main.jsp"/>
-    <fmt:bundle basename="${localeLocation}">
+    <fmt:bundle basename="${localePath}">
         <form action="/products" method="POST" name="user">
             <input type="text" placeholder=
                 <fmt:message key="username"/> class="form" name="username"/>

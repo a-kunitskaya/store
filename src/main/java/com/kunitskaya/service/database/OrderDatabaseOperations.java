@@ -91,6 +91,7 @@ public class OrderDatabaseOperations extends DatabaseOperations {
 
     public Map<Product, Integer> getProductCount(Order order) {
         List<Product> products = order.getProducts();
+        logger.info("Products in order: " + products);
         Map<Product, Integer> productCounts = new HashMap<>();
 
         for (Product product : products) {
@@ -98,7 +99,6 @@ public class OrderDatabaseOperations extends DatabaseOperations {
             Integer count = jdbcTemplate.queryForObject(query, Integer.class);
             productCounts.put(product, count);
         }
-
         return productCounts;
     }
 

@@ -5,13 +5,14 @@
 <html>
 <head>
     <title>Successful Registration</title>
+    <jsp:include page="../resources/style.jsp"/>
 </head>
 <body>
 <div>
-    <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
+    <fmt:bundle basename="${localePath}">
         <h1><fmt:message key="welcome"/></h1>
         <p><fmt:message key="successRegistrationMsg"/></p>
-        <form action="/" method="GET">
+        <form action="/index" method="GET">
             <input type="submit" class="button" value="<fmt:message key="logInBtn"/>"/>
         </form>
     </fmt:bundle>

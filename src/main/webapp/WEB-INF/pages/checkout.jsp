@@ -5,10 +5,11 @@
 <html>
 <head>
     <title>Checkout</title>
+    <jsp:include page="../resources/style.jsp"/>
 </head>
 <body>
 <div>
-    <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
+    <fmt:bundle basename="${localePath}">
         <h1><fmt:message key="checkoutMsg"/></h1>
         <form action="/cancelOrder" method="GET">
             <input type="submit" class="button" value="<fmt:message key="cancelBtn"/>"/>

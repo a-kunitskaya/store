@@ -2,6 +2,7 @@ package com.kunitskaya.service.configuration;
 
 import com.kunitskaya.entity.Product;
 import com.kunitskaya.entity.User;
+import com.kunitskaya.service.TradeService;
 import com.kunitskaya.service.database.OrderDatabaseOperations;
 import com.kunitskaya.service.database.ProductDatabaseOperations;
 import com.kunitskaya.service.database.UserDatabaseOperations;
@@ -73,5 +74,10 @@ public class BeanConfiguration {
     @Bean
     public TablesInitializer tablesInitializer() {
         return new TablesInitializer();
+    }
+
+    @Bean
+    public TradeService tradeService() {
+        return new TradeService();
     }
 }

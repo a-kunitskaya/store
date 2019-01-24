@@ -5,9 +5,10 @@
 <html>
 <head>
     <title>Products</title>
+    <jsp:include page="../resources/style.jsp"/>
 </head>
 <body>
-<fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
+<fmt:bundle basename="${localePath}">
     <c:if test="${not empty cancelledOrder}">
         <h1><fmt:message key="cancelledOrderMsg"/></h1>
     </c:if>

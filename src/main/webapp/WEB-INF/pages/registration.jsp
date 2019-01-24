@@ -5,10 +5,11 @@
 <html>
 <head>
     <title>Registration</title>
+    <jsp:include page="../resources/style.jsp"/>
 </head>
 <body>
 <div>
-    <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
+    <fmt:bundle basename="${localePath}">
         <form action="/registration" method="POST">
             <input type="text" placeholder=
                 <fmt:message key="username"/> class="form" name="username"/>

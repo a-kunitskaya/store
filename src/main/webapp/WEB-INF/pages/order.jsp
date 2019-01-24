@@ -5,9 +5,10 @@
 <html>
 <head>
     <title>Order</title>
+    <jsp:include page="../resources/style.jsp"/>
 </head>
 <body>
-<fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
+<fmt:bundle basename="${localePath}">
  <h1><fmt:message key="viewOrderMsg"/></h1>
     <br/>
 <table>
@@ -15,6 +16,7 @@
         <th>ID</th>
         <th>NAME</th>
         <th>PRICE</th>
+        <th>COUNT</th>
     </tr>
     <c:forEach var="product" items="${order}">
     <tr>

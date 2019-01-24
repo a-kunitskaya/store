@@ -30,9 +30,22 @@ public class MainController {
     @Autowired
     private Logger logger;
     private Order order;
+    private String locale;
+    private String localeLocation;
 
-    @RequestMapping(method = RequestMethod.GET)
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String selectLocale(@ModelAttribute("locale") String locale, @ModelAttribute("localeLocation") String localeLocation) {
+        this.locale = locale;
+        this.localeLocation = localeLocation;
+        return "main";
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String getIndex(Model model) {
+        model.addAttribute("locale", locale);
+        model.addAttribute("localeLocation", localeLocation);
+
         return "index";
     }
 

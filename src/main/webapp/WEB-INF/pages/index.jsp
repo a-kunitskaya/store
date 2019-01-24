@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="en_US"/>
+<fmt:setLocale value="${locale}"/>
 <html>
 <head>
     <title>Trade System</title>
+    <link rel="stylesheet" href="../resources/css/main.css"/>
 </head>
 <body>
 <div>
-    <fmt:bundle basename="com.kunitskaya.service.configuration.i18n.EnLocaleBundle">
+
+    <jsp:include page="main.jsp"/>
+    <fmt:bundle basename="${localeLocation}">
         <form action="/products" method="POST" name="user">
             <input type="text" placeholder=
                 <fmt:message key="username"/> class="form" name="username"/>

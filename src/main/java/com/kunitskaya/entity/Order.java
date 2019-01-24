@@ -1,5 +1,6 @@
 package com.kunitskaya.entity;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class Order {
     private List<Product> products;
     private double totalPrice;
     private OrderStatus status;
+    @NotNull(message = "id is required")
     private String id;
 
     public List<Product> getProducts() {

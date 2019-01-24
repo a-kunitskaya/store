@@ -1,9 +1,11 @@
 package com.kunitskaya.entity;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 //Task 1 Order
 public class Product {
+    @NotNull(message = "id is required")
     private String id;
     private double price;
     private String name;

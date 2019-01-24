@@ -3,10 +3,17 @@ package com.kunitskaya.entity;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 @Component
 @Scope("session")
 public class User {
+    @NotNull(message = "Username is required")
+    @Size(min = 1, max = 30)
     private String username;
+    @NotNull(message = "Username is required")
+    @Size(min = 1, max = 30)
     private String password;
     private UserRoles role;
 

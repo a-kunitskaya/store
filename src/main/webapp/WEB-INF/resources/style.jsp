@@ -1,3 +1,4 @@
+<style>
 .button {
     background-color: #646f99;
     border: none;
@@ -67,3 +68,4 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+</style>

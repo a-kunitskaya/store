@@ -2,9 +2,7 @@ package com.kunitskaya.service.database;
 
 import com.kunitskaya.entity.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.stereotype.Service;
 
-@Service
 public class UserDatabaseOperations extends DatabaseOperations {
 
     public void createTable() {

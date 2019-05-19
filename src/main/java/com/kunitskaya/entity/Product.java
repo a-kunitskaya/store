@@ -1,9 +1,11 @@
 package com.kunitskaya.entity;
 
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-//Task 1 Order
+@Component
 public class Product {
     @NotNull(message = "id is required")
     private String id;

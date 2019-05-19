@@ -1,10 +1,12 @@
 package com.kunitskaya.entity;
 
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-//Task 1 Purchase
+@Component
 public class Order {
     private List<Product> products;
     private double totalPrice;
